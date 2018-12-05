@@ -1,0 +1,70 @@
+>> echats基本使用步骤： 1. HTML中设置容器（给出宽高）
+			2. 利用ID获取容器并初始化成图表: myChart = echarts.init(document.getElementById('my')
+			3. 设置图表配置项：var myChartOption = {} 
+			4. 执行myChart.setOption(myChartOption)
+
+>> legend: 图例
+
+>> 柱状条显示不同颜色：在series中设置normal: {color: function(params) {//首先定义一个数组var colorList =['#5b9cd4','#ed7d31','#a5a5a5','#ffc003'];return colorList[params.dataIndex]}}
+
+>> 柱状条不显示数值，在series中的normal中设置label: {show: false}
+
+>> !important标记区别Firefox和IE6:  Firefox支持!important标记，IE6忽略!important标记
+
+>> $(".class").click(function(event){
+     $(this).next('p').toggle()   点击.class元素时让他的下一个p元素显示或隐藏
+     $(this).children("a").toggleClass(".class");  点击.class元素给他的子集a 添加或取消.class样式
+
+})
+
+>> 盒子中有input最好把边框加在input上
+
+>> input, button距离其他标签默认4px
+
+>> 控制台获取字体报404： css引用错误
+
+>> table-borderless: 无边框    table-striped: 灰白条纹
+
+>> $.extend({// 为jQuery类添加类方法})
+   $.fn = $.prototype
+   $.fn.extend({// 对jQuery.prototype进行扩展，就是为jQuery类添加成员函数})
+   
+>> $.extend(boolean,dest,src1,src2,src3...)  jQuery的extend重载原型方法： 第一个参数boolean代表是否进行深度拷贝    src1,src2,src3进行合并，参数名称相同时后者覆盖前者
+
+>> 基本数据类型存储在栈内存中，引用数据类型存储在堆内存中。基本数据类型b 复制a 后，a的值改变，b不受影响(不涉及深浅拷贝)
+
+>> 深拷贝与浅拷贝：引用数据类型--名存在栈内存中，值存在于堆内存中，但是栈内存会提供一个引用的地址指向堆内存中的值；当b 复制a时，只是复制了a的堆内存地址，指向的时同一个堆内存；所以...
+		   实现深拷贝的几种方法：for in 遍历进行复制；JSON.stringify和JSON.parse转换一遍；$.extend(true,{},a)；
+
+>> temp = value.replace（/(\d+)px/g,function(){return ...}）return的是执行value.replace()后的结果(已经装换或没有转换)；如果没有找到替换的内容就返回原内容(temp)
+
+>> dependencies 运行时依赖       devDependencies 开发时依赖
+
+>> this指向的是执行时调用他的上一级对象     构造函数中的this指向的是当前实例对象
+
+>> Number,Boolean,String 是函数类型
+
+>> DOM事件流的三个阶段：事件捕获  处于目标阶段  事件冒泡    （大部分浏览器都是传到window对象）         
+	事件捕获：事件从document传到HTML再到body就停止了，element元素在捕获阶段不会接收事件
+	处于目标阶段：事件在element元素上发生并处理，但事件处理会被看成冒泡阶段的一部分
+	冒泡阶段：事件又传回文档
+
+
+>> webstorm 提交本地项目到GitHub(配合git命令行) 
+			1、在GitHub上新建仓库 
+			2、使用git remote add 仓库地址.git  命令与远程仓库建立连接
+			3、git add .
+			4、git commit -m '信息描述'
+			5、git push origin master
+	如果使用git命令行上传了项目，而webstorm打开的项目位置与本地上传位置不同。想要在webstorm打开的文件位置与远程连	接并继续上传更新：
+		1、在webstorm中打开的项目文件中执行git init
+		2、使用git remote add 仓库地址.git  命令与远程仓库建立连接
+		3、执行git push origin master时报错：! [rejected]        mastme'rer -> master (non-fast-forward)
+		原因：git仓库中已经有一部分代码，所以它不允许你直接把你的代码覆盖上去
+
+		4、git pull origin master 时报错：Git Pull Failed: refusing to merge unrelated histories   
+		5、git merge origin master也报这个错
+		可以强推代码覆盖远程仓库的代码(git push -f)  或者执行git fetch -> git merge 若报错则执行 git pull origin 		master --allow-unrelated-histories  退出后git add .  -> git commit -m '提交信息' ->git merge ->git push
+	
+		执行git pull相当于git fetch -> git merge
+	
